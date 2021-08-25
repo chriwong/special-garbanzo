@@ -9,12 +9,45 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <!-- This is the Driver dependency from your vendor! (MySQL in this case) -->
+        <!-- You *could* download it manually and include it in your classpath when running the program...
+                but that's why we have Maven - to take care of all the messy JAR dependencies. -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version>
         </dependency>
     </dependencies>
+
+    <properties>
+        <!-- Here we're telling Maven to treat the source code as Java 11 -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <!-- and here we're telling Maven to make the compiled bytecode compatible with JVM 1.8 -->
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <!-- This section specifies that the `plugin` Maven command should include
+            all dependencies in the output JAR. Otherwise you would have to
+            specify a really long classpath when executing the program -->
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
