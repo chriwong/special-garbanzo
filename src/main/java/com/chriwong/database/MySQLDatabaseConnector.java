@@ -63,11 +63,11 @@ public class MySQLDatabaseConnector implements DatabaseConnector {
             Statement statement = connection.createStatement();
             ResultSet tables = statement.executeQuery("SHOW TABLES");
 
-            System.out.println("---TABLES---");
+            System.out.println("----TABLES----");
             while (tables.next()) {
-                System.out.printf("|%2s|%n", tables.getString(1));
+                System.out.printf("|%-12s|%n", tables.getString(1));
             }
-            System.out.println("------------");
+            System.out.println("--------------");
         } catch (SQLException e) {
             System.out.println("SQL Exception: " + e.getMessage());
         }

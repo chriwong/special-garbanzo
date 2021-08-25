@@ -11,7 +11,7 @@ The goal of this project is to create a text-based CLI program that reads user i
 
 * JDBC is just a bunch of _interfaces_
   * there's no actual code
-  * Java leaves this up to developers of database systems (Postgres, MySQL, Oracle, etc.)
+  * Java leaves this up to the vendors of database systems (Postgres, MySQL, Oracle, etc.)
 
 * Databases are software applications entirely separate from your Java programs
   * Microsoft Word, Google Chrome, Spotify - all separate applications
@@ -67,6 +67,9 @@ First, we practice running commands through the CLI to ensure our download worke
             </dependency>
         </dependencies>
         ```
+   * Setup other `pom.xml` properties/goals
+     * Java source + target version
+     * output JAR dependency bundling
    * Research connection URL format
      * check official docs (or StackOverflow)
        * [example for MySQL](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html)
@@ -116,6 +119,8 @@ public class MyClass {
    * Try executing `INSERT`, `DELETE`, etc. using JDBC
    * Use `PreparedStatement` instead of `Statement` class
      * difference is `PreparedStatement` can specify a more generic SQL statement that _later_ receives parameters
+     * it is more performant - a statement is compiled once and rerun vs compiled each time)
+     * it is safer - helps prevent SQL injection attacks
 
 5) Create CLI program
    * Read input for SQL command type (`INSERT` vs `SELECT`)
